@@ -1,4 +1,3 @@
-  GNU nano 5.4                                                                       ../backup_pg.sh                                                                                 
 #!/bin/bash
 
 TIMESTAMP=`date +%F-%H%M`
@@ -7,14 +6,9 @@ PG_PATH="/usr/lib/postgresql/15/bin/pg_dump"
 PG_USER=""
 PG_PASSWORD=""
 
-printenv
-
 REMOTE_HOST_USERNAME="androz"
 REMOTE_HOST_ADDRESS=""
 REMOTE_HOST_PATH="/home/androz/backups"
-
-echo 'a'
-echo "PGPASSWORD='$PG_PASSWORD' psql -U $PG_USER -h localhost -d postgres -t -c 'select datname from pg_database where not datistemplate' | grep '\S' | awk NF"
 
 for db in `PGPASSWORD="$PG_PASSWORD" psql -U $PG_USER -h localhost -d postgres -t -c 'select datname from pg_database where not datistemplate' | grep '\S' | awk NF`; do
 
