@@ -12,6 +12,8 @@ REMOTE_HOST_PATH="/home/androz/postgres_backups"
 
 for db in `PGPASSWORD="$PG_PASSWORD" psql -U $PG_USER -h localhost -d postgres -t -c 'select datname from pg_database where not datistemplate' | grep '\S' | awk NF`; do
 
+    echo "Backing up $db"
+
     BACKUPS_DIR="/home/debian/PG_BACKUPS/$db"
     BACKUP_NAME="$db-$TIMESTAMP"
 
